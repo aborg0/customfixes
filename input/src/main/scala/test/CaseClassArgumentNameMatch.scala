@@ -9,6 +9,8 @@ object CaseClassArgumentNameMatch {
   final case class Person(lastName: String, firstName: String, age: Int, profession: Set[String])
     extends NamesShouldMatch
 
+  final case class PersonUnchecked(lastName: String, firstName: String)
+
   def simple: Unit = {
     (null: Person) match {
       case Person(firstName, lastName, age, profession) => () // assert: CaseClassArgumentNameMatch
@@ -40,5 +42,8 @@ object CaseClassArgumentNameMatch {
 //    (null: Person) match {
 //      case person@Person(firstName@"S", _, _, _) => () // assert: CaseClassArgumentNameMatch
 //    }
+    (null: PersonUnchecked) match {
+      case PersonUnchecked(firstName, lastName) => () // ok, it is not extending the marker trait
+    }
   }
 }
