@@ -33,11 +33,10 @@ object CaseClassArgumentNameMatch {
     (null: Option[Person]) match {
       case Some(person@Person(firstName, _, _, _)) => () // assert: CaseClassArgumentNameMatch
     }
-    // TODO support this too
-//    (null: Either[String, Person]) match {
-//      case Left(message) => ()
-//      case Right(person@Person(firstName, _, _, _)) => () // assert: CaseClassArgumentNameMatch
-//    }
+    (null: Either[String, Person]) match {
+      case Left(message) => ()
+      case Right(person@Person(firstName, _, _, _)) => () // assert: CaseClassArgumentNameMatch
+    }
     // TODO how should this work?
 //    (null: Person) match {
 //      case person@Person(firstName@"S", _, _, _) => () // assert: CaseClassArgumentNameMatch

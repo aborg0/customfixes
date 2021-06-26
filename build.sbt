@@ -17,6 +17,7 @@ inThisBuild(
     scalacOptions ++= List(
       "-Yrangepos"
     ),
+    version := "0.0.1-SNAPSHOT",
     // Compile / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
   )
 )
@@ -25,10 +26,15 @@ publish / skip := true
 
 lazy val rules = project.settings(
   moduleName := "customfixes",
+  crossScalaVersions := List(V.scala213, V.scala211, V.scala212),
+  publish / scalaVersion := "2.12.14",
+  publishLocal / scalaVersion := "2.12.14",
   libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
 )
 
-lazy val markers = project.settings()
+lazy val markers = project.settings(
+  moduleName := "customfixes-markers",
+)
 
 lazy val input = project.dependsOn(markers).settings(
   publish / skip := true
