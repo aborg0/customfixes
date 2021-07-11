@@ -18,5 +18,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Run tests
+    - name: Run generic tests
       run: sbt genericTests/test
+    - name: Run slick tests
+      run: sbt slickTests/test
