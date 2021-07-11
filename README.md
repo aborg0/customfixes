@@ -8,11 +8,11 @@ Currently we do not have a release yet. In order to use this in your project, pl
  - check out this project
    - `sbt markers/publishLocal`
    - `sbt "++ 2.12.14 rules/publishLocal"`
- - add the generated artifacts as a dependency: `libraryDependencies += "com.github.aborg0" %% "customfixes-markers" % "0.0.1-SNAPSHOT"`
+ - add the generated artifacts as a dependency: `libraryDependencies += "com.github.aborg0" %% "customfixes-generic-markers" % "0.0.1-SNAPSHOT"`
   - tip: In case you have issues with IDEA not being able to import your project 
     ("Extracting structure failed, reason: not ok build status: Error (BuildMessages(Vector(),Vector(),Vector(),Vector(),Error))"), 
     stop the sbt shell first!
-  - and as a [scalafix dependency](https://scalacenter.github.io/scalafix/docs/rules/external-rules.html): `ThisBuild / scalafixDependencies += "com.github.aborg0" %% "customfixes" % "0.0.1-SNAPSHOT"`
+  - and as a [scalafix dependency](https://scalacenter.github.io/scalafix/docs/rules/external-rules.html): `ThisBuild / scalafixDependencies += "com.github.aborg0" %% "customfixes-generic" % "0.0.1-SNAPSHOT"`
  - the `project/plugins.sbt` should contain `addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.29")`
 
 ## Case class argument name match

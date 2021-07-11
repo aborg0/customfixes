@@ -24,33 +24,36 @@ inThisBuild(
 
 publish / skip := true
 
-lazy val rules = project.settings(
-  moduleName := "customfixes",
+lazy val genericRules = project.in(file("generic/rules")).settings(
+  moduleName := "customfixes-generic",
   crossScalaVersions := List(V.scala213, V.scala211, V.scala212),
   publish / scalaVersion := "2.12.14",
   publishLocal / scalaVersion := "2.12.14",
   libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
 )
 
-lazy val markers = project.settings(
-  moduleName := "customfixes-markers",
+lazy val genericMarkers = project.in(file("generic/markers")).settings(
+  moduleName := "customfixes-generic-markers",
 )
 
-lazy val input = project.dependsOn(markers).settings(
+lazy val genericInput = project.in(file("generic/input")).dependsOn(genericMarkers).settings(
+  moduleName := "generic-input",
   publish / skip := true
 )
 
-lazy val output = project.dependsOn(markers).settings(
+lazy val genericOutput = project.in(file("generic/output")).dependsOn(genericMarkers).settings(
+  moduleName := "generic-output",
   publish / skip := true
 )
 
-lazy val tests = project
+lazy val genericTests = project.in(file("generic/tests"))
   .settings(
+    moduleName := "generic-tests",
     publish / skip := true,
     libraryDependencies += "ch.epfl.scala" % "scalafix-testkit" % V.scalafixVersion % Test cross CrossVersion.full,
-    scalafixTestkitOutputSourceDirectories := (output / Compile / sourceDirectories).value,
-    scalafixTestkitInputSourceDirectories := (input / Compile / sourceDirectories).value,
-    scalafixTestkitInputClasspath := (input / Compile / fullClasspath).value
+    scalafixTestkitOutputSourceDirectories := (genericOutput / Compile / sourceDirectories).value,
+    scalafixTestkitInputSourceDirectories := (genericInput / Compile / sourceDirectories).value,
+    scalafixTestkitInputClasspath := (genericInput / Compile / fullClasspath).value
   )
-  .dependsOn(rules)
+  .dependsOn(genericRules)
   .enablePlugins(ScalafixTestkitPlugin)
