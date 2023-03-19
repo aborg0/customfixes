@@ -40,6 +40,8 @@ class CaseClassArgumentNameMatch extends SemanticRule("CaseClassArgumentNameMatc
             args.zip(names).collect {
               case (v@Pat.Var(name), expected) if name.value != expected =>
                 Patch.lint(LiteralArgument(v.pos, expected, v.syntax))
+              case (v@Pat.Bind(Pat.Var(name), _), expected) if name.value != expected =>
+                Patch.lint(LiteralArgument(v.pos, expected, v.syntax))
             }
           }).toSeq.flatten
       }

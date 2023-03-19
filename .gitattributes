@@ -109,3 +109,6 @@
 *.so            binary
 *.war           binary
 *.jks           binary
+
+# Treat Scala sources as unix line endings
+*.scala         text eol=lf

@@ -37,10 +37,10 @@ object CaseClassArgumentNameMatch {
       case Left(message) => ()
       case Right(person@Person(firstName, _, _, _)) => () // assert: CaseClassArgumentNameMatch
     }
-    // TODO how should this work?
-//    (null: Person) match {
-//      case person@Person(firstName@"S", _, _, _) => () // assert: CaseClassArgumentNameMatch
-//    }
+    // This might be questionable, but for now it still reports a warning
+    (null: Person) match {
+      case person@Person(firstName@"S", _, _, _) => () // assert: CaseClassArgumentNameMatch
+    }
     (null: PersonUnchecked) match {
       case PersonUnchecked(firstName, lastName) => () // ok, it is not extending the marker trait
     }

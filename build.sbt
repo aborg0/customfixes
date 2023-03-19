@@ -27,8 +27,8 @@ publish / skip := true
 lazy val genericRules = project.in(file("generic/rules")).settings(
   moduleName := "customfixes-generic",
   crossScalaVersions := List(V.scala213, V.scala211, V.scala212),
-  publish / scalaVersion := "2.12.14",
-  publishLocal / scalaVersion := "2.12.14",
+  publish / scalaVersion := "2.12.17",
+  publishLocal / scalaVersion := "2.12.17",
   libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
 )
 
@@ -70,7 +70,7 @@ lazy val slickInput = project.in(file("slick/input")).settings(
   moduleName := "slick-input",
   libraryDependencies ++= Seq(
     "com.typesafe.slick" %% "slick" % "3.3.3",
-    "org.slf4j" % "slf4j-nop" % "1.6.4",
+    "org.slf4j" % "slf4j-nop" % "2.0.5",
   ),
   publish / skip := true
 )
@@ -79,7 +79,7 @@ lazy val slickOutput = project.in(file("slick/output")).settings(
   moduleName := "slick-output",
   libraryDependencies ++= Seq(
     "com.typesafe.slick" %% "slick" % "3.3.3",
-    "org.slf4j" % "slf4j-nop" % "1.6.4",
+    "org.slf4j" % "slf4j-nop" % "2.0.5",
   ),
   publish / skip := true
 )
